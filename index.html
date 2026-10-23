@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0b1730">
+<title>German Speaking Set 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0b1730;--navy2:#13264d;--ink:#0a1226;--gold:#ffc83d;--gold2:#e89b0c;--cream:#fff8e8;--muted:#9fb3d9;--tc:#2f9bff;--tc2:#1565c0;--ok:#2ecc71;--ok2:#1e9e52;--red:#ff4b5c;--red2:#c4202f}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--navy)}
+body{min-height:100vh;color:#fff;font:16px/1.5 "Nunito",-apple-system,BlinkMacSystemFont,sans-serif;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
+background:radial-gradient(1200px 600px at 50% -10%,#2a4f9a 0,transparent 60%),radial-gradient(800px 500px at 100% 100%,#3a1f6b 0,transparent 60%),linear-gradient(180deg,#14295a,var(--navy) 70%);background-attachment:fixed}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.06;background-image:radial-gradient(#fff 1px,transparent 1.5px);background-size:22px 22px}
+.flag{height:5px;background:linear-gradient(90deg,#000 0 33.3%,#dd0000 33.3% 66.6%,#ffce00 66.6%);position:relative;z-index:1}
+.game{font-family:"Lilita One","Nunito",sans-serif;font-weight:400;letter-spacing:.01em}
+header{max-width:960px;margin:0 auto;padding:20px 16px 6px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;position:relative}
+h1{font-family:"Lilita One",sans-serif;font-weight:400;font-size:clamp(1.6rem,4vw,2.2rem);line-height:1;color:var(--gold);text-shadow:0 3px 0 #8a4b00,0 6px 14px rgba(0,0,0,.5);-webkit-text-stroke:1px #6b3a00}
+h1 small{display:block;font-family:"Nunito",sans-serif;font-weight:800;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);-webkit-text-stroke:0;text-shadow:none;margin-top:6px}
+.wrap{max-width:960px;margin:0 auto;padding:0 16px 40px;position:relative}
+select{appearance:none;-webkit-appearance:none;border:3px solid var(--ink);background:linear-gradient(#24407a,#182d58);color:#fff;border-radius:12px;padding:8px 30px 8px 12px;font:800 .8rem "Nunito",sans-serif;max-width:200px;box-shadow:0 4px 0 var(--ink);cursor:pointer;background-image:linear-gradient(45deg,transparent 50%,#fff 50%),linear-gradient(135deg,#fff 50%,transparent 50%),linear-gradient(#24407a,#182d58);background-position:calc(100% - 15px) 52%,calc(100% - 10px) 52%,0 0;background-size:5px 5px,5px 5px,100% 100%;background-repeat:no-repeat}
+.chips{display:flex;gap:10px;overflow-x:auto;padding:12px 2px 16px;scrollbar-width:none;-webkit-mask:linear-gradient(90deg,#000 92%,transparent)}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;border:3px solid var(--ink);background:linear-gradient(#2b4a8a,#1b3266);color:#dfe8ff;border-radius:14px;padding:7px 16px;font:400 .95rem "Lilita One",sans-serif;letter-spacing:.02em;cursor:pointer;white-space:nowrap;box-shadow:0 4px 0 var(--ink),inset 0 2px 0 rgba(255,255,255,.18);transition:transform .1s,box-shadow .1s}
+.chip:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ink)}
+.chip.on{background:linear-gradient(#ffd866,var(--gold2));color:#4a2600;text-shadow:0 1px 0 rgba(255,255,255,.5)}
+.bar{display:flex;align-items:center;gap:12px;margin-bottom:18px;font:400 1rem "Lilita One",sans-serif;color:#fff;text-shadow:0 2px 0 var(--ink)}
+.prog{flex:1;height:18px;border:3px solid var(--ink);border-radius:99px;overflow:hidden;background:#0a1530;box-shadow:inset 0 3px 4px rgba(0,0,0,.5)}
+.prog i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(#7dffb0,var(--ok) 50%,var(--ok2) 51%);box-shadow:inset 0 -2px 0 rgba(0,0,0,.15);transition:width .5s cubic-bezier(.3,1.4,.5,1)}
+#known{background:var(--ink);padding:2px 10px;border-radius:10px;color:var(--gold)}
+.scene{perspective:1600px;cursor:pointer;-webkit-tap-highlight-color:transparent;max-width:720px;margin:0 auto}
+.card{position:relative;min-height:min(60vh,460px);transition:transform .6s cubic-bezier(.4,1.5,.5,1);transform-style:preserve-3d}
+.card.flip{transform:rotateY(180deg)}
+.scene:hover .card:not(.flip){transform:translateY(-3px) rotateX(2deg)}
+.face{position:absolute;inset:0;border:4px solid var(--ink);border-radius:26px;padding:20px;display:flex;flex-direction:column;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden;
+box-shadow:0 10px 0 var(--ink),0 24px 40px rgba(0,0,0,.45)}
+.front{background:radial-gradient(120% 80% at 50% 0,rgba(255,255,255,.28),transparent 60%),linear-gradient(160deg,var(--tc),var(--tc2))}
+.front::before{content:"";position:absolute;inset:8px;border-radius:18px;border:3px solid rgba(255,255,255,.35);pointer-events:none}
+.front::after{content:"?";position:absolute;right:-10px;bottom:-60px;font:400 15rem/1 "Lilita One",sans-serif;color:rgba(0,0,0,.12);pointer-events:none}
+.back{transform:rotateY(180deg);background:linear-gradient(var(--cream),#f3e6c4);color:var(--ink);overflow:auto}
+.back::before{content:"";position:absolute;inset:8px;border-radius:18px;border:3px dashed rgba(10,18,38,.15);pointer-events:none}
+.tag{position:relative;z-index:1;align-self:center;display:inline-block;font:400 .95rem "Lilita One",sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--ink);padding:6px 18px 5px;border-radius:12px;box-shadow:0 3px 0 rgba(0,0,0,.35);text-shadow:none}
+.back .tag{background:var(--tc2)}
+.q{position:relative;z-index:1;font:400 clamp(1.6rem,5vw,2.5rem)/1.15 "Lilita One",sans-serif;text-align:center;margin:auto 6px 12px;color:#fff;text-shadow:0 3px 0 rgba(0,0,0,.35),0 0 2px rgba(0,0,0,.4);-webkit-text-stroke:.5px rgba(0,0,0,.25)}
+.en{position:relative;z-index:1;text-align:center;font-weight:700;font-size:1rem;color:rgba(255,255,255,.85);margin:0 auto auto;max-width:90%;background:rgba(0,0,0,.18);padding:6px 14px;border-radius:12px}
+.a{position:relative;z-index:1;font-weight:700;font-size:clamp(1.15rem,3.4vw,1.55rem);line-height:1.6;margin:auto 4px;color:#1a2440}
+.a .w{border-radius:5px;padding:0 1px;transition:background .12s,color .12s}
+.a .w.hl{background:var(--gold);color:#3a1d00;box-shadow:0 2px 0 var(--gold2)}
+.small{position:relative;z-index:1;font-size:.85rem;font-weight:800;color:#7a6a45;margin-top:14px;padding-top:10px;border-top:2px dashed rgba(10,18,38,.15)}
+.hint{text-align:center;font-size:.78rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:26px}
+.ctrls,.row2{display:grid;gap:12px;max-width:720px;margin:14px auto 0}
+.ctrls{grid-template-columns:1fr 1.3fr 1fr}
+.row2{grid-template-columns:repeat(4,1fr)}
+.btn{--b:#3a62b0;--b2:#24427f;border:3px solid var(--ink);background:linear-gradient(var(--b),var(--b2));color:#fff;border-radius:16px;padding:14px 8px 12px;font:400 1.1rem "Lilita One",sans-serif;letter-spacing:.02em;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;text-shadow:0 2px 0 rgba(0,0,0,.35);
+box-shadow:0 6px 0 var(--ink),inset 0 3px 0 rgba(255,255,255,.25),inset 0 -4px 0 rgba(0,0,0,.15);transition:transform .08s,box-shadow .08s,filter .15s}
+.btn:hover{filter:brightness(1.08)}
+.btn:active{transform:translateY(5px);box-shadow:0 1px 0 var(--ink),inset 0 3px 0 rgba(255,255,255,.25)}
+.btn.speak{--b:#ff6b78;--b2:var(--red2);font-size:1.25rem}
+.btn.known{--b:#4fe08a;--b2:var(--ok2)}
+.row2 .btn{font-size:.9rem;padding:10px 4px 9px;border-radius:14px}
+.btn.on{--b:#ffd866;--b2:var(--gold2);color:#4a2600;text-shadow:0 1px 0 rgba(255,255,255,.5)}
+.speed{display:flex;align-items:center;gap:12px;max-width:720px;margin:22px auto 0;padding:12px 16px;background:rgba(0,0,0,.25);border:3px solid var(--ink);border-radius:16px;font:400 1rem "Lilita One",sans-serif}
+.speed input{flex:1;-webkit-appearance:none;appearance:none;height:12px;border-radius:99px;background:#0a1530;border:2px solid var(--ink);outline:none}
+.speed input::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:linear-gradient(#ffd866,var(--gold2));border:3px solid var(--ink);box-shadow:0 3px 0 var(--ink);cursor:pointer}
+.speed input::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--gold);border:3px solid var(--ink);cursor:pointer}
+#rateV{min-width:3.4em;text-align:right;color:var(--gold)}
+.list{display:none;gap:16px;flex-direction:column;max-width:760px;margin:0 auto}
+.list.show{display:flex}
+.list>.btn{align-self:flex-start;padding:10px 18px}
+.li{position:relative;background:linear-gradient(var(--cream),#f3e6c4);color:var(--ink);border:4px solid var(--ink);border-left:12px solid var(--tc);border-radius:20px;padding:16px 18px;box-shadow:0 6px 0 var(--ink)}
+.li h3{font:400 1.2rem/1.25 "Lilita One",sans-serif;margin:10px 0 2px}
+.li p{font-weight:700;font-size:1rem;color:#1a2440}
+.li .en{font-size:.85rem;margin:0 0 8px;padding:0;background:none;color:#7a6a45;text-align:left;max-width:none}
+.li .row{display:flex;justify-content:space-between;align-items:center}
+.li .tag{align-self:auto;background:var(--tc2);font-size:.75rem;padding:4px 12px}
+.mini{border:3px solid var(--ink);background:linear-gradient(#3a62b0,#24427f);color:#fff;border-radius:10px;padding:5px 12px;font:400 .85rem "Lilita One",sans-serif;cursor:pointer;box-shadow:0 3px 0 var(--ink)}
+.mini:active{transform:translateY(2px);box-shadow:0 1px 0 var(--ink)}
+.done{font:400 1.3rem "Lilita One",sans-serif;color:#fff;background:var(--ok);border:3px solid var(--ink);border-radius:50%;width:34px;height:34px;display:grid;place-items:center}
+@keyframes pop{0%{transform:scale(.92);opacity:.4}100%{transform:scale(1);opacity:1}}
+.card.pop{animation:pop .3s cubic-bezier(.3,1.6,.5,1)}
+@media (max-width:480px){.row2{grid-template-columns:1fr 1fr}.face{padding:16px}.ctrls .btn{font-size:1rem}}
+@media (min-width:1024px){.card{min-height:480px}}
+.hdr-r{display:flex;gap:10px;align-items:center}
+.btn.fsb{padding:6px 12px;font-size:1.2rem;border-radius:12px;box-shadow:0 4px 0 var(--ink),inset 0 2px 0 rgba(255,255,255,.25)}
+.fsx{display:none!important;position:fixed;top:calc(10px + env(safe-area-inset-top));right:12px;z-index:50;width:46px;height:46px;padding:0!important;border-radius:50%!important}
+body.focus .fsx{display:flex!important}
+body.focus header,body.focus .chips,body.focus .hint,body.focus .flag{display:none}
+body.focus .wrap{padding-top:16px;max-width:1100px}
+body.focus .bar{padding-right:60px}
+body.focus .scene,body.focus .ctrls,body.focus .row2,body.focus .speed{max-width:900px}
+body.focus .card{min-height:calc(100vh - 330px)}
+@media (max-width:480px){body.focus .card{min-height:calc(100vh - 380px)}}
+</style>
+</head>
+<body>
+<div class="flag"></div>
+<header>
+  <h1>🇩🇪 Deutsch Speaking<small>Edexcel IGCSE 4GN1 · Set 2 · oral prep cards</small></h1>
+  <div class="hdr-r"><select id="voice" aria-label="Voice"></select><button class="btn fsb" id="fs" title="Fullscreen (F)">⛶</button></div>
+</header>
+<button class="btn fsx" id="fsx" title="Exit fullscreen">✕</button>
+<div class="wrap">
+  <div class="chips" id="chips"></div>
+  <div class="bar"><span id="count"></span><div class="prog"><i id="prog"></i></div><span id="known"></span></div>
+
+  <div id="study">
+    <div class="scene" id="scene">
+      <div class="card" id="card">
+        <div class="face front">
+          <span class="tag" id="ftag"></span>
+          <div class="q" id="fq"></div>
+          <div class="en" id="fen"></div>
+        </div>
+        <div class="face back">
+          <span class="tag" id="btag"></span>
+          <div class="a" id="ba"></div>
+          <div class="small" id="bq"></div>
+        </div>
+      </div>
+    </div>
+    <div class="hint">Tap card to flip · Keys: ← → space S F</div>
+    <div class="ctrls">
+      <button class="btn" id="prev">← Back</button>
+      <button class="btn speak" id="say">🔊 Hören</button>
+      <button class="btn" id="next">Next →</button>
+    </div>
+    <div class="row2">
+      <button class="btn known" id="mark">✓ Got it</button>
+      <button class="btn" id="shuffle">🔀 Shuffle</button>
+      <button class="btn" id="todo">Unlearnt</button>
+      <button class="btn" id="listBtn">☰ List</button>
+    </div>
+    <div class="speed">🐢<input type="range" id="rate" min="0.5" max="1.2" step="0.05" value="0.85">🐇<span id="rateV">0.85×</span></div>
+  </div>
+
+  <div class="list" id="list"></div>
+</div>
+
+<script>
+const D=[
+["A4 Customs", "Was gibt es für interessante Traditionen in deinem Land?", "What interesting traditions are there in your country?", "In meinem Land gibt es viele interessante Traditionen. Zum Beispiel feiern wir Weihnachten und Neujahr. Die Familie ist dabei sehr wichtig."],
+["A4 Customs", "Welche Sitten und Bräuche findest du besonders wichtig? Warum?", "Which customs do you find particularly important? Why?", "Ich finde Familientraditionen besonders wichtig. Sie bringen die Familie zusammen und machen Spaß."],
+["A4 Customs", "Welches Fest hast du neulich gefeiert?", "Which celebration did you recently celebrate?", "Ich habe neulich meinen Geburtstag gefeiert. Ich war mit meiner Familie und meinen Freunden zusammen. Wir haben zusammen gegessen."],
+["A4 Customs", "Inwiefern ist es nötig, Traditionen zu behalten?", "To what extent is it necessary to keep traditions?", "Ich denke, Traditionen sind wichtig. Sie zeigen unsere Kultur und Geschichte. Deshalb sollte man sie behalten."],
+["A5 Traditions", "Welche Feste und Feiertage gibt es in deinem Land?", "What festivals and holidays are there in your country?", "Es gibt viele Feste und Feiertage, zum Beispiel Weihnachten, Neujahr und den Nationalfeiertag. Die meisten Menschen feiern mit ihrer Familie."],
+["A5 Traditions", "Wie wirst du das nächste Fest feiern?", "How will you celebrate the next festival?", "Ich werde das nächste Fest mit meiner Familie feiern. Wir werden zusammen essen und Filme schauen. Es wird gemütlich."],
+["A5 Traditions", "Welches Fest findest du am interessantesten und warum?", "Which festival do you find most interesting and why?", "Ich finde Weihnachten am interessantesten. Ich mag die Atmosphäre und das Essen. Es macht auch Spaß, Geschenke zu bekommen."],
+["A5 Traditions", "Inwiefern sind traditionelle Feste wichtig für Jugendliche?", "To what extent are traditional festivals important for young people?", "Traditionelle Feste sind für Jugendliche wichtig. Sie können etwas über ihre Kultur lernen. Außerdem kann man Zeit mit der Familie verbringen."],
+["B3 School Trips", "Beschreibe bitte eine Klassenfahrt, die du neulich gemacht hast.", "Please describe a school trip you went on recently.", "Letztes Jahr habe ich eine Klassenfahrt gemacht. Wir waren mit unseren Freunden unterwegs. Wir haben viele lustige Dinge gemacht."],
+["B3 School Trips", "Was sind die Vorteile von Klassenfahrten im Vergleich zu Ausflügen mit der Familie?", "What are the advantages of school trips compared to family outings?", "Bei einer Klassenfahrt kann man mehr Zeit mit Freunden verbringen. Man lernt auch seine Mitschüler besser kennen."],
+["B3 School Trips", "Aus deiner Erfahrung, wie könnte man an deiner Schule die Klassenfahrten verbessern?", "From your experience, how could school trips at your school be improved?", "Die Klassenfahrten könnten länger sein. Ich denke, wir sollten auch mehr Freizeit haben."],
+["B3 School Trips", "Welche Schulveranstaltungen werden bald stattfinden? Wirst du teilnehmen? Warum?", "What school events are coming up soon? Will you take part? Why?", "Bald gibt es ein Sportfest an meiner Schule. Ich werde wahrscheinlich teilnehmen, weil ich mit meinen Freunden Spaß haben möchte."],
+["B3 School Trips", "Welche Klassenfahrt plant deine Klasse/Schule als Nächstes?", "Which school trip is your class/school planning next?", "Meine Klasse plant wahrscheinlich eine Reise nach Malaysia. Ich freue mich darauf, weil ich neue Orte sehen möchte."],
+["B5 Future", "Was für Pläne hast du für das nächste Schuljahr?", "What plans do you have for next school year?", "Nächstes Jahr möchte ich gute Noten bekommen. Ich möchte auch meine Zeit besser organisieren."],
+["B5 Future", "Hast du vor, auf die Uni zu gehen? Warum?", "Are you planning to go to university? Why?", "Ja, ich habe vor, auf die Uni zu gehen. Ich möchte dort mehr lernen und später einen guten Job finden."],
+["B5 Future", "Warum ist es wichtig, mehrere Berufsoptionen für die Zukunft zu haben?", "Why is it important to have several career options for the future?", "Es ist wichtig, mehrere Optionen zu haben. Wenn ein Plan nicht funktioniert, hat man andere Möglichkeiten."],
+["B5 Future", "Hast du schon ein Praktikum gemacht?", "Have you done work experience yet?", "Nein, ich habe noch kein Praktikum gemacht. Ich möchte aber in Zukunft ein Praktikum machen."],
+["B5 Future", "Was hat deine Schule organisiert, um euch mit der Berufswahl zu helfen?", "What has your school organised to help you choose a career?", "Unsere Schule organisiert Präsentationen und gibt uns Informationen über verschiedene Berufe. Das ist sehr hilfreich."],
+["C1 Home", "Beschreib bitte dein Haus oder deine Wohnung.", "Please describe your house or flat.", "Ich wohne in einer modernen Wohnung. Sie hat mehrere Schlafzimmer, ein Wohnzimmer und eine Küche. Mein Lieblingszimmer ist mein Schlafzimmer."],
+["C1 Home", "Welche Änderungen hat deine Familie im Haus gemacht?", "What changes has your family made to the house?", "Meine Familie hat einige Möbel geändert. Wir haben auch mein Zimmer neu eingerichtet. Jetzt ist es gemütlicher."],
+["C1 Home", "Wie hast du dein Zimmer gemütlicher gemacht?", "How have you made your room cosier?", "Ich habe mein Zimmer aufgeräumt und neue Möbel gekauft. Ich habe auch einige Bilder an die Wand gehängt."],
+["C1 Home", "Wenn du älter bist, in was für einem Haus wirst du wohnen?", "When you are older, what kind of house will you live in?", "Wenn ich älter bin, möchte ich in einem großen modernen Haus wohnen. Ich möchte einen Garten und ein großes Wohnzimmer haben."],
+["C1 Home", "Warum wohnen manche Leute lieber in einer Wohnung als in einem Haus?", "Why do some people prefer living in a flat rather than a house?", "Eine Wohnung ist oft kleiner und einfacher. Man muss weniger putzen und es gibt weniger Arbeit."],
+["C4 Family & Friends", "Warum macht es Spaß, Geschwister zu haben?", "Why is it fun to have siblings?", "Geschwister können sehr lustig sein. Man kann zusammen spielen und reden. Manchmal streitet man aber auch."],
+["C4 Family & Friends", "Wie verstehst du dich normalerweise mit anderen Familienmitgliedern?", "How do you usually get on with other family members?", "Ich verstehe mich normalerweise gut mit meiner Familie. Wir reden viel zusammen. Natürlich gibt es manchmal kleine Probleme."],
+["C4 Family & Friends", "Warum ist es wichtig, gute Freunde zu haben?", "Why is it important to have good friends?", "Gute Freunde sind wichtig, weil man ihnen vertrauen kann. Sie helfen einem, wenn man Probleme hat. Außerdem kann man zusammen Spaß haben."],
+["C4 Family & Friends", "Beschreibe deinen besten Freund/deine beste Freundin.", "Describe your best friend.", "Mein bester Freund ist nett und lustig. Er ist immer für mich da. Wir haben viele gemeinsame Interessen."],
+["C4 Family & Friends", "Was hast du neulich mit deinen Freunden unternommen/gemacht?", "What did you recently do with your friends?", "Neulich habe ich mich mit meinen Freunden getroffen. Wir waren in einem Einkaufszentrum und haben zusammen gegessen. Es war sehr lustig."],
+["C4 Family & Friends", "Und mit deiner Familie?", "And with your family?", "Letztes Wochenende habe ich Zeit mit meiner Familie verbracht. Wir haben zusammen gegessen und einen Film gesehen. Es war sehr schön."],
+["E3 Shopping & Money", "Wie oft gehst du einkaufen?", "How often do you go shopping?", "Ich gehe ungefähr einmal pro Woche einkaufen. Manchmal gehe ich mit meiner Familie und manchmal mit Freunden."],
+["E3 Shopping & Money", "Was hast du vor kurzem gekauft? Wo? Wie war das?", "What did you buy recently? Where? How was it?", "Ich habe vor kurzem neue Kleidung gekauft. Ich war in einem Einkaufszentrum. Es war gut, aber ein bisschen teuer."],
+["E3 Shopping & Money", "Bekommst du Taschengeld? Was machst du damit?", "Do you get pocket money? What do you do with it?", "Ja, ich bekomme Taschengeld. Ich spare etwas Geld und kaufe manchmal Essen oder andere Dinge."],
+["E3 Shopping & Money", "Wie findest du Einkaufsmöglichkeiten in deiner Stadt?", "What do you think of the shopping options in your town?", "Ich finde die Einkaufsmöglichkeiten sehr gut. Es gibt viele Einkaufszentren und Geschäfte. Man kann fast alles finden."],
+["E3 Shopping & Money", "Welche Vor- und Nachteile hat das Online-Shopping?", "What are the advantages and disadvantages of online shopping?", "Online-Shopping ist praktisch und schnell. Man kann von zu Hause einkaufen. Aber man kann die Produkte vorher nicht sehen."],
+["E3 Shopping & Money", "Bist du sparsam oder verschwenderisch?", "Are you thrifty or wasteful with money?", "Ich denke, ich bin ziemlich sparsam. Ich versuche, nicht zu viel Geld auszugeben. Ich spare gern für größere Dinge."],
+["E3 Shopping & Money", "Sollen Jugendliche Taschengeld bekommen? Warum? Wofür?", "Should young people get pocket money? Why? For what?", "Ja, Jugendliche sollten Taschengeld bekommen. Sie können damit lernen, mit Geld umzugehen. Sie können zum Beispiel Kleidung oder Essen kaufen."],
+["E5 Food", "Wie wichtig sind Essen und Trinken in deinem Leben?", "How important are food and drink in your life?", "Essen und Trinken sind sehr wichtig für mich. Ich esse gern mit meiner Familie und meinen Freunden. Ich mag auch gutes Essen."],
+["E5 Food", "Was wirst du heute Abend essen?", "What will you eat this evening?", "Heute Abend werde ich wahrscheinlich Reis und Hühnchen essen. Ich mag dieses Essen sehr gern."],
+["E5 Food", "Warum ist es wichtig, einen ausgewogenen Speiseplan zu haben?", "Why is it important to have a balanced diet?", "Ein ausgewogener Speiseplan ist wichtig für die Gesundheit. Man braucht verschiedene Vitamine und Nährstoffe. Man hat dann auch mehr Energie."],
+["E5 Food", "Hast du eine gesunde Ernährung?", "Do you have a healthy diet?", "Ich denke, meine Ernährung ist ziemlich gesund. Ich esse Obst und Gemüse, aber ich esse manchmal auch Fast Food."],
+["E5 Food", "Beschreibe deine letzte Familienmahlzeit: Wer hat gekocht, was gab es, wie hat es geschmeckt?", "Describe your last family meal: who cooked, what was there, how did it taste?", "Meine Mutter hat das Essen gekocht. Wir haben Reis, Hühnchen und Gemüse gegessen. Es hat sehr gut geschmeckt."],
+["E5 Food", "Ist es wichtig, mit der Familie zusammen zu essen?", "Is it important to eat together with your family?", "Ja, ich denke, es ist wichtig. Man kann zusammen reden und Zeit verbringen. Es ist auch eine gute Familientradition."]
+].map((r,i)=>({id:i,topic:r[0],q:r[1],en:r[2],a:r[3]}));
+
+const TC={"A4 Customs":["#38a8ff","#1565c0"],"A5 Traditions":["#ff9a3c","#d9531e"],"B3 School Trips":["#a07bff","#5b2fd1"],"B5 Future":["#2fd6a0","#0e8f6a"],"C1 Home":["#ff6b9a","#c2245a"],"C4 Family & Friends":["#ffc93c","#d98a00"],"E3 Shopping & Money":["#5ade5a","#239a2f"],"E5 Food":["#ff6a4d","#c42d1c"],"All":["#38a8ff","#1565c0"]};
+const tc=(el,t)=>{const c=TC[t]||TC.All;el.style.setProperty("--tc",c[0]);el.style.setProperty("--tc2",c[1])};
+const $=id=>document.getElementById(id);
+const store={get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch{}}};
+let known=new Set(store.get("s2k",[])), topic="All", onlyTodo=false, deck=[], i=0, listMode=false;
+const topics=["All",...new Set(D.map(c=>c.topic))];
+
+function build(keepShuffle){
+  deck=D.filter(c=>(topic==="All"||c.topic===topic)&&(!onlyTodo||!known.has(c.id)));
+  i=Math.min(i,Math.max(deck.length-1,0));
+}
+function chips(){
+  $("chips").innerHTML=topics.map(t=>`<button class="chip${t===topic?" on":""}" data-t="${t}">${t}</button>`).join("");
+}
+function words(s){return s.split(/(\s+)/).map(w=>/\s/.test(w)?w:`<span class="w">${w}</span>`).join("")}
+function render(){
+  const tot=D.filter(c=>topic==="All"||c.topic===topic);
+  const k=tot.filter(c=>known.has(c.id)).length;
+  $("known").textContent=`${k}/${tot.length} ✓`;
+  $("prog").style.width=(tot.length?k/tot.length*100:0)+"%";
+  $("todo").classList.toggle("on",onlyTodo);
+  $("card").classList.remove("flip");
+  if(listMode){renderList();return}
+  const c=deck[i];
+  if(!c){$("count").textContent="0";$("fq").textContent="Alles gelernt! 🎉";$("fen").textContent="All cards in this set are marked as learnt.";$("ftag").textContent=topic;$("ba").textContent="";return}
+  $("count").textContent=`${i+1} / ${deck.length}`;
+  tc($("card"),c.topic);$("card").classList.remove("pop");void $("card").offsetWidth;$("card").classList.add("pop");
+  $("ftag").textContent=$("btag").textContent=c.topic;
+  $("fq").textContent=c.q; $("fen").textContent=c.en;
+  $("ba").innerHTML=words(c.a); $("bq").textContent=c.q;
+  $("mark").textContent=known.has(c.id)?"↺ Unmark":"✓ Got it";
+}
+function renderList(){
+  $("count").textContent=deck.length+" cards";
+  $("list").innerHTML=deck.map(c=>`<div class="li" style="--tc:${TC[c.topic][0]};--tc2:${TC[c.topic][1]}"><div class="row"><span class="tag">${c.topic}</span>${known.has(c.id)?'<span class="done">✓</span>':""}</div><h3>${c.q}</h3><div class="en">${c.en}</div><p>${c.a}</p><div style="margin-top:8px;display:flex;gap:8px"><button class="mini" data-say="${c.id}">🔊 Antwort</button><button class="mini" data-sayq="${c.id}">🔊 Frage</button></div></div>`).join("");
+}
+
+/* TTS: online Google German voice (works on iPhone silent mode), device voices as fallback */
+const hasSS="speechSynthesis" in window;
+let voices=[], engine=store.get("gv2","g"), audio=new Audio(), runId=0;
+function loadVoices(){
+  voices=hasSS?speechSynthesis.getVoices().filter(v=>/^de/i.test(v.lang)):[];
+  $("voice").innerHTML='<option value="g">🇩🇪 Google Deutsch (online)</option>'+voices.map((v,n)=>`<option value="${v.name}">${v.name.replace(/\(.*\)/,"").trim()} · ${v.lang}</option>`).join("");
+  if(engine!=="g"&&!voices.some(v=>v.name===engine)&&voices.length)engine="g";
+  $("voice").value=engine;
+}
+loadVoices(); if(hasSS)speechSynthesis.onvoiceschanged=loadVoices;
+function stopTTS(){runId++;audio.pause();if(hasSS)speechSynthesis.cancel();document.querySelectorAll(".w.hl").forEach(w=>w.classList.remove("hl"))}
+function chunks(text){
+  const out=[];let cur="";
+  for(const part of text.match(/[^.!?,]+[.!?,]*\s*/g)||[text]){
+    if((cur+part).length>180&&cur){out.push(cur);cur=""}
+    cur+=part;
+  }
+  if(cur.trim())out.push(cur);
+  return out;
+}
+function wordSpans(hlEl,text){
+  if(!hlEl)return null;
+  const ws=[...hlEl.querySelectorAll(".w")],starts=[];let p=0;
+  ws.forEach(w=>{p=text.indexOf(w.textContent,p);starts.push(p);p+=w.textContent.length});
+  return {ws,starts,mark(ci){ws.forEach(w=>w.classList.remove("hl"));let n=-1;starts.forEach((s,k)=>{if(s<=ci)n=k});if(n>=0)ws[n].classList.add("hl")}};
+}
+function speak(text,hlEl){
+  stopTTS();
+  const id=runId, hl=wordSpans(hlEl,text), rate=+$("rate").value;
+  if(engine!=="g"&&hasSS)return speakDevice(text,hl,rate);
+  const parts=chunks(text);let k=0,off=0;
+  const next=()=>{
+    if(id!==runId)return;
+    if(k>=parts.length){hl&&hl.ws.forEach(w=>w.classList.remove("hl"));return}
+    const t=parts[k];
+    audio.src="https://translate.google.com/translate_tts?ie=UTF-8&tl=de&client=tw-ob&q="+encodeURIComponent(t.trim());
+    audio.playbackRate=rate; audio.defaultPlaybackRate=rate;
+    audio.ontimeupdate=()=>{if(!hl)return;const d=isFinite(audio.duration)&&audio.duration>0?audio.duration:t.length*0.07;hl.mark(off+Math.min(t.length-1,Math.floor(t.length*audio.currentTime/d)))};
+    audio.onended=()=>{off+=t.length;k++;next()};
+    const fail=()=>{if(id!==runId||!hasSS)return;runId++;speakDevice(text,hl,rate,true)};
+    audio.onerror=fail;
+    audio.play().catch(e=>{if(e.name!=="AbortError")fail()});
+  };
+  next();
+}
+function speakDevice(text,hl,rate,now){
+  speechSynthesis.cancel();
+  (now?f=>f():f=>setTimeout(f,60))(()=>{
+    const u=new SpeechSynthesisUtterance(text);
+    u.lang="de-DE"; u.rate=rate;
+    const v=voices.find(v=>v.name===engine)||voices[0]; if(v)u.voice=v;
+    if(hl){u.onboundary=e=>hl.mark(e.charIndex);u.onend=()=>hl.ws.forEach(w=>w.classList.remove("hl"))}
+    window._u=u; speechSynthesis.speak(u);
+  });
+}
+function sayCurrent(){
+  const c=deck[i];if(!c)return;
+  if($("card").classList.contains("flip"))speak(c.a,$("ba"));else speak(c.q);
+}
+
+/* events */
+$("chips").onclick=e=>{const t=e.target.dataset.t;if(!t)return;topic=t;i=0;build();chips();render()};
+$("scene").onclick=()=>{if(deck[i])$("card").classList.toggle("flip")};
+$("next").onclick=()=>{stopTTS();i=(i+1)%Math.max(deck.length,1);render()};
+$("prev").onclick=()=>{stopTTS();i=(i-1+deck.length)%Math.max(deck.length,1);render()};
+$("say").onclick=sayCurrent;
+$("mark").onclick=()=>{const c=deck[i];if(!c)return;known.has(c.id)?known.delete(c.id):known.add(c.id);store.set("s2k",[...known]);if(onlyTodo){build()}else if(known.has(c.id)){i=(i+1)%deck.length}render()};
+$("shuffle").onclick=()=>{for(let n=deck.length-1;n>0;n--){const r=Math.random()*(n+1)|0;[deck[n],deck[r]]=[deck[r],deck[n]]}i=0;render()};
+$("todo").onclick=()=>{onlyTodo=!onlyTodo;i=0;build();render()};
+$("listBtn").onclick=()=>{listMode=true;$("list").classList.add("show");$("study").style.display="none";$("list").insertAdjacentHTML("beforebegin","");render();$("list").insertAdjacentHTML("afterbegin",'<button class="btn" id="back">← Back to cards</button>');$("back").onclick=()=>{listMode=false;$("list").classList.remove("show");$("study").style.display="";render()}};
+$("list").addEventListener("click",e=>{const a=e.target.dataset.say,q=e.target.dataset.sayq;if(a)speak(D[a].a);if(q)speak(D[q].q)});
+$("rate").oninput=e=>{audio.playbackRate=+e.target.value;$("rateV").textContent=(+e.target.value).toFixed(2)+"×";store.set("s2r",e.target.value)};
+$("voice").onchange=e=>{engine=e.target.value;store.set("gv2",engine);stopTTS()};
+document.onkeydown=e=>{if(listMode)return;if(e.key==="ArrowRight")$("next").click();else if(e.key==="ArrowLeft")$("prev").click();else if(e.key===" "){e.preventDefault();$("scene").click()}else if(e.key.toLowerCase()==="s")sayCurrent();else if(e.key.toLowerCase()==="f")setFocus(!document.body.classList.contains("focus"))};
+let tx=0;$("scene").addEventListener("touchstart",e=>tx=e.touches[0].clientX,{passive:true});
+$("scene").addEventListener("touchend",e=>{const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>60){e.preventDefault();(dx<0?$("next"):$("prev")).click()}});
+
+/* fullscreen: real fullscreen where supported, plus a focus layout (iPhone has no fullscreen API) */
+const fsEl=document.documentElement;
+const fsReq=fsEl.requestFullscreen||fsEl.webkitRequestFullscreen, fsExit=document.exitFullscreen||document.webkitExitFullscreen;
+const fsOn=()=>document.fullscreenElement||document.webkitFullscreenElement;
+function setFocus(on){
+  document.body.classList.toggle("focus",on);
+  if(on&&fsReq&&!fsOn())try{const r=fsReq.call(fsEl);r&&r.catch&&r.catch(()=>{})}catch{}
+  if(!on&&fsOn()&&fsExit)try{fsExit.call(document)}catch{}
+  window.scrollTo(0,0);
+}
+$("fs").onclick=()=>setFocus(true);
+$("fsx").onclick=()=>setFocus(false);
+["fullscreenchange","webkitfullscreenchange"].forEach(ev=>document.addEventListener(ev,()=>{if(!fsOn())document.body.classList.remove("focus")}));
+
+const r=store.get("s2r",null);if(r){$("rate").value=r;$("rateV").textContent=(+r).toFixed(2)+"×"}
+chips();build();render();
+</script>
+</body>
+</html>
